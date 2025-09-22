@@ -6,16 +6,35 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "ChatBot API",
+      title: process.env.NODE_ENV === "production" 
+        ? "ChatBot API - Production" 
+        : "ChatBot API - Development",
       version: "1.0.0",
-      description: "API documentation for ChatBot application",
+      description: process.env.NODE_ENV === "production"
+        ? "Production API documentation for ChatBot application - Live Environment"
+        : "Development API documentation for ChatBot application - Testing Environment",
     },
-    servers: [
-      {
-        url: `http://localhost:${process.env.PORT || 3001}`,
-        description: "Development server",
-      },
-    ],
+    servers: process.env.NODE_ENV === "production"
+      ? [
+          {
+            url: "https://chatbot-backend-rlq8.onrender.com",
+            description: "Production server",
+          },
+          {
+            url: `http://localhost:${process.env.PORT || 3001}`,
+            description: "Development server",
+          },
+        ]
+      : [
+          {
+            url: `http://localhost:${process.env.PORT || 3001}`,
+            description: "Development server",
+          },
+          {
+            url: "https://chatbot-backend-rlq8.onrender.com",
+            description: "Production server",
+          },
+        ],
     components: {
       schemas: {
         Conversation: {

@@ -23,6 +23,10 @@ app.use(
 app.use(
   cors({
     origin: [
+      // Production URLs
+      "https://chatbot-frontend-six-livid.vercel.app",
+      "https://chatbot-backend-rlq8.onrender.com",
+      // Development URLs
       "http://localhost:3000",
       "http://localhost:3001",
       "http://localhost:3002",
